@@ -1,0 +1,13 @@
+[
+  {
+    "title": "Producto de prueba 4",
+    "description": "Producto de prueba",
+    "code": "T-004",
+    "price": 444,
+    "status": true,
+    "stock": 40,
+    "category": "test",
+    "thumbnail": [],
+    "id": "4"
+  }
+]
