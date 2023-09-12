@@ -1,0 +1,32 @@
+<div>
+  <h1>Listado de Productos</h1>
+  {{#each products}}
+    <div class="card">
+      <div class="title">
+        {{this.title}}
+      </div>
+      <div class="price">
+        <p>Precio: ${{this.price}}</p>
+      </div>
+    </div>
+  {{/each}}
+</div>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background: #3d3d3d;
+    color: white;
+    line-height: 1rem;
+    margin: 1rem;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+  }
+
+  .title {
+    font-weight: 700;
+  }
+</style>
