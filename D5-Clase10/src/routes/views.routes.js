@@ -15,4 +15,14 @@ router.get('/', async (req, res) => {
   }  
 })
 
+router.get('/realTimeProducts', async (req, res) => {
+  try {
+    const products = await pm.getProducts();
+    res.render('realTimeProducts', { products } );
+  } catch (error) {
+    console.log(error);
+  }  
+})
+
+
 module.exports = router;
