@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
   } = req.body;
 
   if (!title || !description || !code || !price || !stock || !category) {
-    console.error("Todos los campos son oblgiatorios.")
+    console.error("Todos los campos son obligatorios.")
     return res.status(400).json({ error: "Todos los campos son obligatorios." });
   }
 
@@ -72,6 +72,9 @@ router.post('/', async (req, res) => {
 
     await pm.addProduct(newProduct);
     console.log("Producto creado con exito.")
+
+    socketServer.emit('add-product', newProduct);
+
     res.status(201).json(newProduct);
   } catch (err) {
     console.error('Error interno al agregar el producto:', err);
@@ -113,6 +116,8 @@ router.delete('/:pid', async (req, res) => {
     await pm.deleteProduct(pid);
 
     console.log(`Producto con id ${pid} eliminado con exito.`)
+    socketServer.emit('delete-product', pid);
+    
     res.status(200).json({ message: `Producto con id ${pid} eliminado con exito.` });
   } catch (err) {
     console.error(`Error interno al eliminar el producto con id ${pid}.`, err);
