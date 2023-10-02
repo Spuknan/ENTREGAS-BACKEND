@@ -1,7 +1,7 @@
-import express from 'express';
-
+import apiRoutes from './api/api.routes.js';
 const router = express.Router();
 
-console.log("asd");
+// Rutas para /api y /views
+router.use('/api', apiRoutes);
 
 export default router;

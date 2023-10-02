@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Producto de prueba 4",
+    "description": "Producto de prueba",
+    "code": "T-004",
+    "price": 444,
+    "status": true,
+    "stock": 40,
+    "category": "test",
+    "thumbnail": [],
+    "id": "4"
+  },
+  {
+    "title": "Producto de prueba 5 actualizado",
+    "description": "Producto de prueba 5",
+    "code": "T-005",
+    "price": 555,
+    "status": true,
+    "stock": 50,
+    "category": "test",
+    "thumbnail": [],
+    "id": "5"
+  },
+  {
+    "title": "Producto de prueba 6",
+    "description": "Producto de prueba 6",
+    "code": "T-006",
+    "price": 666,
+    "status": true,
+    "stock": 60,
+    "category": "test",
+    "thumbnail": [],
+    "id": "6"
+  }
+]

@@ -1,28 +1,33 @@
-import dotenv from 'dotenv';
 import express from 'express';
-import morgan from 'morgan';
+import { __dirname } from './utils.js';
 import colors from 'colors';
-import { dbConnect } from './utils/dbConnect';
+import morgan from 'morgan';
+import handlebars from 'express-handlebars';
+import { Server } from 'socket.io';
+import routes from './routes/routes.js';
 
-dotenv.config();
+// express server
 const app = express();
 const PORT = process.env.PORT || 8080;
+const httpServer = app.listen(PORT, () => {
+  console.log(`Server running on`, colors.cyan(`http://localhost:${PORT}`));
+});
 
-// Middlewares
-app.use(express.json());
-app.use(morgan('tiny'));
+// Socket server
+export const socketServer = new Server(httpServer);
+
+socketServer.on("connection", (socket) => {
+  console.log("Nuevo cliente conectado:", colors.magenta(socket.id));
+});
+
+// Views
+app.engine('handlebars', handlebars.engine());
+app.set('views', __dirname + '/views');
+app.set('view engine', 'handlebars');
+app.use(express.static(__dirname+'/public'));
 
 // Entry point para las rutas
+app.use('/', routes);
 
-// Conexión a base de datos MongoDB
-dbConnect();
-
-// Conexión al servidor de express
-const httpServer = app.listen(PORT, () => {
-  console.log(`server running on -----> http://localhost:${PORT}`.bgCyan);
-});
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Error interno del servidor.' });
-});
+// Logger
+app.use(morgan('dev'));
