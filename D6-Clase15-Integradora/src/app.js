@@ -1,4 +1,6 @@
 import express from 'express';
+import mongoConnect from './dao/mongodb/mongoConnect.js';
+import 'dotenv/config'
 import { __dirname } from './utils.js';
 import colors from 'colors';
 import morgan from 'morgan';
@@ -12,6 +14,12 @@ const PORT = process.env.PORT || 8080;
 const httpServer = app.listen(PORT, () => {
   console.log(`Server running on`, colors.cyan(`http://localhost:${PORT}`));
 });
+
+// Respuestas en formato json
+app.use(express.json());
+
+// Conexión a la base de datos
+mongoConnect;
 
 // Socket server
 export const socketServer = new Server(httpServer);

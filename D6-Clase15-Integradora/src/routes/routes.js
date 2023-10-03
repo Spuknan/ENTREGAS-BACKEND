@@ -1,7 +1,10 @@
-import apiRoutes from './api/api.routes.js';
+import express from 'express';
 const router = express.Router();
+import apiRoutes from './api.routes.js';
+import viewsRoutes from './views.routes.js';
 
-// Rutas para /api y /views
+router.use('/', viewsRoutes);
 router.use('/api', apiRoutes);
+
 
 export default router;
