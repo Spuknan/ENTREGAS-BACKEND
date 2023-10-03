@@ -5,8 +5,8 @@ import { __dirname } from './utils.js';
 import colors from 'colors';
 import morgan from 'morgan';
 import handlebars from 'express-handlebars';
-import { Server } from 'socket.io';
 import routes from './routes/routes.js';
+import configureSocket from './socketHandler.js';
 
 // express server
 const app = express();
@@ -22,11 +22,7 @@ app.use(express.json());
 mongoConnect;
 
 // Socket server
-export const socketServer = new Server(httpServer);
-
-socketServer.on("connection", (socket) => {
-  console.log("Nuevo cliente conectado:", colors.magenta(socket.id));
-});
+const io = configureSocket(httpServer);
 
 // Views
 app.engine('handlebars', handlebars.engine());
